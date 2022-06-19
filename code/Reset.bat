@@ -26,7 +26,7 @@ echo  [97mDate: [90m%date%
 echo  [97mTime: [90m%H%:%M%:%S% %period%
 echo.
 echo      [91m ************************************************************ [0m
-echo       [97m                  Windows Netowork Reset[0m
+echo       [97m                  Window's Netowork Reset[0m
 echo      [91m ************************************************************ [0m
 echo.
 echo.
