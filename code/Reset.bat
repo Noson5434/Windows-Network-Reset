@@ -87,7 +87,7 @@ goto choice
 echo.
 echo  [97mReleasing & Renewing the IP Address ...[0m
 ipconfig /release >nul
-timeout 1 /nobreak >nul
+timeout 3 /nobreak >nul
 ipconfig /renew >nul
 echo  [32mDone.[0m
 timeout 2 /nobreak >nul
@@ -95,6 +95,16 @@ echo.
 
 echo  [97mResetting the Arp Cache ...[0m
 netsh int ip delete arpcache >nul
+arp -d * >nul
+nbtstat -R >nul
+nbtstat -RR >nul
+echo  [32mDone.[0m
+timeout 2 /nobreak >nul
+echo.
+
+echo  [97mFlushing & Registering the DNS ...[0m
+ipconfig /flushdns >nul
+ipconfig /registerdns >nul
 echo  [32mDone.[0m
 timeout 2 /nobreak >nul
 echo.
@@ -108,6 +118,8 @@ echo.
 echo  [97mResetting the Winsock ...[0m
 netsh winsock reset >nul
 netsh winsock reset proxy >nul
+netsh int IPv4 reset >nul
+netsh int ipv6 reset >nul
 echo  [32mDone.[0m
 timeout 2 /nobreak >nul
 echo.
