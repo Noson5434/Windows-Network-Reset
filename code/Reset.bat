@@ -85,7 +85,7 @@ goto choice
 
 :continue
 echo.
-echo  [97mReleasing & Renewing the IP Address ...[0m
+echo  [97mReleasing and Renewing the IP Address ...[0m
 ipconfig /release >nul
 timeout 3 /nobreak >nul
 ipconfig /renew >nul
@@ -102,7 +102,7 @@ echo  [32mDone.[0m
 timeout 2 /nobreak >nul
 echo.
 
-echo  [97mFlushing & Registering the DNS ...[0m
+echo  [97mFlushing and Registering the DNS ...[0m
 ipconfig /flushdns >nul
 ipconfig /registerdns >nul
 echo  [32mDone.[0m
