@@ -87,6 +87,7 @@ goto choice
 echo.
 echo  [97mReleasing & Renewing the IP Address ...[0m
 ipconfig /release >nul
+timeout 1 /nobreak >nul
 ipconfig /renew >nul
 echo  [32mDone.[0m
 timeout 2 /nobreak >nul
@@ -125,8 +126,7 @@ echo.
 goto done
 
 :done
-echo  [32mComplete! Your connection should continue as normal.[0m
-echo Complete! Your connection should continue as normal.
+echo  [32mComplete! [97mYour connection should continue as normal.[0m[0m
 timeout 3 /nobreak >nul
 goto stop
 
