@@ -8,11 +8,22 @@
 title Windows Network Reset
 MODE con:cols=75 lines=200
 
+:: 12Hr Format Time
+FOR /F %%i IN ('WMIC OS Get LocalDateTime /value') DO FOR /F %%j IN ("%%i") DO SET "%%j"
+SET "H=%LocalDateTime:~8,2%"
+SET "M=%LocalDateTime:~10,2%"
+SET "S=%LocalDateTime:~12,2%"
+
+IF "%H%" gtr "11" (set "period=PM") ELSE SET "period=AM"
+SET /a "H=6%H% %% 12"
+IF %H% EQU 0 SET "H=12"
+IF %H% LSS 10 SET "H=0%H%"
+
 echo  [97mCreated by: [90m( Noson Rabinovich )[0m
 echo.
 echo  [97mUser: [90m%USERNAME%
 echo  [97mDate: [90m%date%
-echo  [97mTime: [90m%time%
+echo  [97mTime: [90m%H%:%M%:%S% %period%
 echo.
 echo      [91m ************************************************************ [0m
 echo       [97m                  Windows Netowork Reset[0m
