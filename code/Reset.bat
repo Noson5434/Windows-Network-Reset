@@ -9,15 +9,15 @@ title Windows Network Reset
 MODE con:cols=75 lines=200
 
 :: 12Hr Format Time
-FOR /F %%i IN ('WMIC OS Get LocalDateTime /value') DO FOR /F %%j IN ("%%i") DO SET "%%j"
-SET "H=%LocalDateTime:~8,2%"
-SET "M=%LocalDateTime:~10,2%"
-SET "S=%LocalDateTime:~12,2%"
+for /f %%i in ('WMIC OS Get LocalDateTime /value') do for /f %%j in ("%%i") do set "%%j"
+set "H=%LocalDateTime:~8,2%"
+set "M=%LocalDateTime:~10,2%"
+set "S=%LocalDateTime:~12,2%"
 
-IF "%H%" gtr "11" (set "period=PM") ELSE SET "period=AM"
-SET /a "H=6%H% %% 12"
-IF %H% EQU 0 SET "H=12"
-IF %H% LSS 10 SET "H=0%H%"
+IF "%H%" gtr "11" (set "period=PM") ELSE set "period=AM"
+set /a "H=6%H% %% 12"
+IF %H% EQU 0 set "H=12"
+IF %H% LSS 10 set "H=0%H%"
 
 echo  [97mCreated by: [90m( Noson Rabinovich )[0m
 echo.
@@ -78,31 +78,40 @@ echo.
 goto choice
 
 :choice
-echo Do you want to continue?
-echo This will temporarily disable internet access!
-set /P c=[Y/N]
+set /P c=Are you sure you want to continue[Y/N]?
 if /I "%c%" EQU "Y" goto continue
 if /I "%c%" EQU "N" goto stop
-
 goto choice
 
 :continue
 echo.
-echo Releasing and Renewing...
+echo  [97mReleasing & Renewing the IP Address ...[0m
 ipconfig /release >nul
 ipconfig /renew >nul
+echo  [32mDone.[0m
+timeout 2 /nobreak >nul
+echo.
 
-echo Resetting Arp Cache...
+echo  [97mResetting the Arp Cache ...[0m
 netsh int ip delete arpcache >nul
+echo  [32mDone.[0m
+timeout 2 /nobreak >nul
+echo.
 
-echo Resetting Local IP...
+echo  [97mResetting the Local IP ...[0m
 netsh int ip reset >nul
+echo  [32mDone.[0m
+timeout 2 /nobreak >nul
+echo.
 
-echo Reseting Winsock...
+echo  [97mResetting the Winsock ...[0m
 netsh winsock reset >nul
 netsh winsock reset proxy >nul
+echo  [32mDone.[0m
+timeout 2 /nobreak >nul
+echo.
 
-echo Resetting Network Adapter...
+echo  [97mResetting the Network Adapter ...[0m
 for /F "skip=3 tokens=1,2,3* delims= " %%G in ('netsh interface show interface') DO (
     IF "%%H"=="Connected" netsh interface set interface "%%J" disabled
 )>nul
@@ -110,12 +119,15 @@ for /F "skip=3 tokens=1,2,3* delims= " %%G in ('netsh interface show interface')
 for /F "skip=3 tokens=1,2,3* delims= " %%G in ('netsh interface show interface') DO (
     IF "%%H"=="Disconnected" netsh interface set interface "%%J" enabled
 )>nul
+echo  [32mDone.[0m
+timeout 2 /nobreak >nul
+echo.
 goto done
 
 :done
-echo.
+echo  [32mComplete! Your connection should continue as normal.[0m
 echo Complete! Your connection should continue as normal.
-pause
+timeout 3 /nobreak >nul
 goto stop
 
 :stop
