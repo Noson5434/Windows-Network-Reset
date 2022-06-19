@@ -139,9 +139,13 @@ goto done
 
 :done
 echo  [32mComplete! [97mYour connection should continue as normal.[0m[0m
-timeout 3 /nobreak >nul
+timeout 2 /nobreak >nul
 goto stop
 
 :stop
+<<<<<<< HEAD
 rmdir /S /Q "C:\Windows\Temp\NetworkReset.bat"
 exit
+=======
+exit
+>>>>>>> b8ff148d87fdb628e61809b78168ad8d08706695
