@@ -139,7 +139,7 @@ goto done
 
 :done
 echo  [32mComplete! [97mYour connection should continue as normal.[0m[0m
-timeout 3 /nobreak >nul
+timeout 2 /nobreak >nul
 goto stop
 
 :stop
