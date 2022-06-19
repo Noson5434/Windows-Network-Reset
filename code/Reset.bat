@@ -143,9 +143,5 @@ timeout 2 /nobreak >nul
 goto stop
 
 :stop
-<<<<<<< HEAD
 rmdir /S /Q "C:\Windows\Temp\NetworkReset.bat"
 exit
-=======
-exit
->>>>>>> b8ff148d87fdb628e61809b78168ad8d08706695
