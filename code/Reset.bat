@@ -78,9 +78,9 @@ echo.
 goto choice
 
 :choice
-set /P c=Are you sure you want to continue[Y/N]?
-if /I "%c%" EQU "Y" goto continue
-if /I "%c%" EQU "N" goto stop
+CHOICE /C YN /N /T 5 /D N /M "Are you sure you want to continue [(Y)Yes, (N)No]?"
+IF %ERRORLEVEL% EQU 1 goto continue
+IF %ERRORLEVEL% EQU 2 goto stop
 goto choice
 
 :continue
