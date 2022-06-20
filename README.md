@@ -4,7 +4,7 @@
     - Run the following Script
 
 
-2. Reset Network Script
+2. Network Reset Script
 
 ```
 iwr -useb https://bit.ly/NetworkReset | iex
